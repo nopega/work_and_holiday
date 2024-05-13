@@ -1,0 +1,974 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+<meta http-equiv="”content-language”" content="”th”">
+<meta name="description" content="กรมกิจการเด็กและเยาวชน">
+<meta name="keywords" content="กรมกิจการเด็กและเยาวชน">
+<title>กรมกิจการเด็กและเยาวชน</title>
+<link rel="shortcut icon" href="http://opptgg.opp.go.th/opp/favicon2.ico" type="image/x-icon"> 
+<link rel="icon" href="http://opptgg.opp.go.th/opp/favicon2.ico" type="image/x-icon">
+<link href="../css/default.css" rel="stylesheet" type="text/css">
+<link href="../css/app.css" rel="stylesheet" type="text/css">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="TIS-620">
+<script type="text/javascript" src="../lib/lib_AutoSuggest.js" charset="TIS-620"></script>
+<script language="JavaScript1.4" src="../lib/lib_java.js" type="text/javascript"></script>
+<script language="JavaScript1.4" src="../lib/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="../lib/ts_picker.js"></script>
+<script language="JavaScript" type="text/JavaScript">
+	function fsubmit_request()
+	{			
+		document.forms[0].action  = 'prc_yproject_project_member_detail.php';
+		document.forms[0].submit();
+	}	
+
+	function f_cardreturn(p_prj)
+	{
+			document.forms[0].action  = 'sch_yproject_project_member.php?act=';
+			$('#project_detail_id').val(p_prj);
+			document.forms[0].submit();
+	}
+
+	function data_text_complete (item, msg)
+	{	
+		if (document.getElementById(item).value=='')
+		{
+			alert ('กรุณาระบุ : '+msg);
+			document.getElementById(item).focus();
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	function data_list_complete (item, msg, comp)
+	{		
+		if (document.getElementById(item).value==comp)
+		{
+			alert ('กรุณาระบุ : '+msg);
+			document.getElementById(item).focus();
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}	
+	
+	function div_show_no(div) 
+	{
+		obj = document.getElementById(div);
+		obj.style.display="block";
+	}
+
+	function div_hide_no(div) 
+	{
+		obj = document.getElementById(div);
+		obj.style.display="none";
+	}
+	
+	function div_show(div) 
+	{
+		obj = document.getElementById(div);
+		obj.style.display="block";	
+		obj1 = document.getElementById(div+'_switch_up');
+		obj1.style.display="block";
+		obj2 = document.getElementById(div+'_switch_down');
+		obj2.style.display="none";		
+	}
+
+	function div_hide(div) 
+	{
+		obj = document.getElementById(div);
+		obj.style.display="none";	
+		obj1 = document.getElementById(div+'_switch_up');
+		obj1.style.display="none";
+		obj2 = document.getElementById(div+'_switch_down');
+		obj2.style.display="block";		
+	}
+	
+	function div_toggle(div) 
+	{
+		obj = document.getElementById(div);
+		obj.style.display=!(obj.style.display=="block")? "block" : "none";
+	}
+	
+	function div_show_all()
+	{		
+		div_show('div_1');
+		div_show('div_2');
+		div_show('div_3');
+	}
+	
+	function div_hide_all()
+	{			
+		div_hide('div_1');
+		div_hide('div_2');
+		div_hide('div_3');
+	}
+	
+	window.onload=function()
+	{
+		window.history.forward(-1);
+		div_show_all();document.getElementById('div_race').style.display="none";		//initEnter2Tab();
+	}
+	
+	function f_cal_age (p_date, p_item, p_item2)
+	{	
+		var today = new Date();
+		dateStr = today.getDate();
+		monthStr = today.getMonth();
+		yearStr = today.getFullYear();
+		
+		obj = document.getElementById(p_date);
+		year = (obj.value.substr(6, 4)-543) ;
+		month =  (obj.value.substr(3, 2)-1) ;
+		date =obj.value.substr(0, 2);
+
+		theYear = yearStr - year;
+		theMonth = monthStr - month;
+		theDate = dateStr - date;
+
+		var days = "";
+		 if (monthStr == 0 || monthStr == 2 || monthStr == 4 || monthStr == 6 || monthStr == 7 || monthStr == 9 || monthStr == 11) days = 31;
+		 if (monthStr == 3 || monthStr == 5 || monthStr == 8 || monthStr == 10) days = 30;
+		 if (monthStr == 1) days = 28;
+	
+		 inYears = theYear;
+	
+		 if (month < monthStr && date > dateStr) { 
+			  inYears = parseInt(inYears) + 1;
+			  inMonths = theMonth - 1; 
+		 };
+		 
+		 if (month < monthStr && date <= dateStr) {
+			  inMonths = theMonth; 
+		 } else if (month == monthStr && (date < dateStr || date == dateStr)) { 
+			  inMonths = 0; 
+		 } else if (month == monthStr && date > dateStr) { 
+			  inMonths = 11; 
+		 } else if (month > monthStr && date <= dateStr) { 
+			  inYears = inYears - 1;
+			  inMonths = ((12 - -(theMonth)) + 1); 
+		 } else if (month > monthStr && date > dateStr) { 
+			  inMonths = ((12 - -(theMonth))); 
+		 };
+		 
+		 if (date < dateStr) { 
+			  inDays = theDate; 
+		 } else if (date == dateStr) { 
+			  inDays = 0; 
+		 } else { 
+			  inYears = inYears - 1; 
+			  inDays = days - (-(theDate)); 
+		 };
+
+		document.getElementById(p_item).value = inYears;
+		document.getElementById(p_item2).value = inMonths;
+
+		 if ((inYears < 18) || (inYears >= 31))
+		{
+				document.getElementById(p_date).value = "";
+				document.getElementById(p_item).value =0;
+				document.getElementById(p_item2).value =0;
+				//document.getElementById(p_date).focus();
+				msgbox('alert','อายุไม่ได้ตามเกณฑ์ที่กำหนด !!');
+				return false;
+		}
+	}
+
+	////Picture//////
+
+	function getimg()
+	{
+	//frm.tch_img.src = frm.picture.value ;
+	document.forms[0].picture_person.src = document.forms[0].picture.value
+	}
+
+	function checkfile(id, p_browse , p_text , p_type)
+	{
+		var jpg = new Array('.jpeg','.JPEG','.jpg','.JPG','.gif','.GIF','.png','.PNG');
+		var error = 0;
+		for(var j=0;j<jpg.length;j++)
+			{
+				if(document.getElementById(id).value.indexOf(jpg[j]) == -1)
+					{ 
+					error++;
+					}
+			}
+				if(error == jpg.length)
+					{
+					alert("เลือกได้เฉพาะไฟล์นามสุล jpg , gif หรือ png เท่านั้น");
+					document.getElementById(p_browse).value='';
+					document.getElementById(p_text).value='';
+					document.getElementById(p_type).value='';
+					document.getElementById(id).select();
+					return false;
+					} 
+		
+		return true;
+	}
+	
+	function getStats(fName, p_text){
+	
+	fullName = fName;
+	shortName = fullName.match(/[^\/\\]+$/);
+	document.getElementById(p_text).value = shortName;
+	}
+	
+	
+	function gettype(fName , p_type){
+	
+	fullName = fName;
+	shortName = fullName.match(/[^\/\\.]+$/);
+	document.getElementById(p_type).value = shortName;
+	}
+
+///////////////
+
+function f_copy_father()
+{
+		var v_prefix_code = document.forms[0].fprefix_chk.value;
+		
+		if (v_prefix_code == '001'|| v_prefix_code == '002'|| v_prefix_code == '003'|| v_prefix_code == '004'|| v_prefix_code == '005')
+			{
+				document.forms[0].elements['agree_prefix_name'].value =  '';
+				document.forms[0].elements['agree_prefix_code_thai_'+v_prefix_code].checked = true;
+				document.forms[0].elements['agree_prefix_code_other'].checked = false;	
+			}
+			else
+			{								
+				document.forms[0].elements['agree_prefix_code_other'].checked = true;	
+				document.forms[0].elements['agree_prefix_name'].value =  document.forms[0].fprefix_name.value;
+				document.forms[0].elements['agree_prefix_code'].value =  document.forms[0].fprefix_code.value;
+			}
+	
+		document.forms[0].agree_first_name.value = document.forms[0].ffirst_name.value;
+		document.forms[0].agree_last_name.value = document.forms[0].flast_name.value;
+		document.forms[0].agree_age.value = document.forms[0].fage.value;
+		document.forms[0].agree_card_id.value = document.forms[0].fcard_id.value;
+		document.forms[0].agree_card_id_1.value = document.forms[0].fcard_id_1.value;
+		document.forms[0].agree_card_id_2.value = document.forms[0].fcard_id_2.value;
+		document.forms[0].agree_card_id_3.value = document.forms[0].fcard_id_3.value;
+		document.forms[0].agree_card_id_4.value = document.forms[0].fcard_id_4.value;
+		document.forms[0].agree_card_id_5.value = document.forms[0].fcard_id_5.value;
+		document.forms[0].agree_card_id_6.value = document.forms[0].fcard_id_6.value;
+		document.forms[0].agree_card_id_7.value = document.forms[0].fcard_id_7.value;
+		document.forms[0].agree_card_id_8.value = document.forms[0].fcard_id_8.value;
+		document.forms[0].agree_card_id_9.value = document.forms[0].fcard_id_9.value;
+		document.forms[0].agree_card_id_10.value = document.forms[0].fcard_id_10.value;
+		document.forms[0].agree_card_id_11.value = document.forms[0].fcard_id_11.value;
+		document.forms[0].agree_card_id_12.value = document.forms[0].fcard_id_12.value;
+		document.forms[0].agree_card_id_13.value = document.forms[0].fcard_id_13.value;
+		document.forms[0].agree_occupation_code.value = document.forms[0].foccupation_code.value;
+		document.forms[0].agree_occupation_other.value  = document.forms[0].foccupation_other.value;
+		//document.forms[0].agree_position_detail.value  = document.forms[0].fposition_detail.value;
+		document.forms[0].agree_company_name.value  = document.forms[0].fcompany_name.value;
+		document.forms[0].agree_company_position.value  = document.forms[0].fcompany_position.value;
+		document.forms[0].agree_telephone.value = document.forms[0].ftelephone.value;
+		document.forms[0].agree_mobile.value = document.forms[0].fmobile.value;
+		document.forms[0].agree_fax.value = document.forms[0].ffax.value;	
+		document.forms[0].agree_email.value = document.forms[0].femail.value;	
+		document.forms[0].agree_relation_code.value = '$Fth$';
+}	
+
+function f_copy_mather()
+{
+		var v_prefix_code = document.forms[0].mprefix_chk.value;
+		
+		if (v_prefix_code == '001'|| v_prefix_code == '002'|| v_prefix_code == '003'|| v_prefix_code == '004'|| v_prefix_code == '005')
+			{
+				document.forms[0].elements['agree_prefix_name'].value =  '';
+				document.forms[0].elements['agree_prefix_code_thai_'+v_prefix_code].checked = true;
+				document.forms[0].elements['agree_prefix_code_other'].checked = false;	
+			}
+			else
+			{							
+				document.forms[0].elements['agree_prefix_code_other'].checked = true;	
+				document.forms[0].elements['agree_prefix_name'].value =  document.forms[0].mprefix_name.value;
+				document.forms[0].elements['agree_prefix_code'].value =  document.forms[0].mprefix_code.value;
+			}
+	
+		document.forms[0].agree_first_name.value = document.forms[0].mfirst_name.value;
+		document.forms[0].agree_last_name.value = document.forms[0].mlast_name.value;
+		document.forms[0].agree_age.value = document.forms[0].mage.value;
+		document.forms[0].agree_card_id.value = document.forms[0].mcard_id.value;
+		document.forms[0].agree_card_id_1.value = document.forms[0].mcard_id_1.value;
+		document.forms[0].agree_card_id_2.value = document.forms[0].mcard_id_2.value;
+		document.forms[0].agree_card_id_3.value = document.forms[0].mcard_id_3.value;
+		document.forms[0].agree_card_id_4.value = document.forms[0].mcard_id_4.value;
+		document.forms[0].agree_card_id_5.value = document.forms[0].mcard_id_5.value;
+		document.forms[0].agree_card_id_6.value = document.forms[0].mcard_id_6.value;
+		document.forms[0].agree_card_id_7.value = document.forms[0].mcard_id_7.value;
+		document.forms[0].agree_card_id_8.value = document.forms[0].mcard_id_8.value;
+		document.forms[0].agree_card_id_9.value = document.forms[0].mcard_id_9.value;
+		document.forms[0].agree_card_id_10.value = document.forms[0].mcard_id_10.value;
+		document.forms[0].agree_card_id_11.value = document.forms[0].mcard_id_11.value;
+		document.forms[0].agree_card_id_12.value = document.forms[0].mcard_id_12.value;
+		document.forms[0].agree_card_id_13.value = document.forms[0].mcard_id_13.value;
+		document.forms[0].agree_occupation_code.value = document.forms[0].moccupation_code.value;
+		document.forms[0].agree_occupation_other.value  = document.forms[0].moccupation_other.value;
+		//document.forms[0].agree_position_detail.value  = document.forms[0].mposition_detail.value;
+		document.forms[0].agree_company_name.value  = document.forms[0].mcompany_name.value;
+		document.forms[0].agree_company_position.value  = document.forms[0].mcompany_position.value;
+		document.forms[0].agree_telephone.value = document.forms[0].mtelephone.value;
+		document.forms[0].agree_mobile.value = document.forms[0].mmobile.value;	
+		document.forms[0].agree_fax.value = document.forms[0].mfax.value;	
+		document.forms[0].agree_email.value = document.forms[0].memail.value;	
+		document.forms[0].agree_relation_code.value = '$Mth$';
+}
+
+function f_copy_agree()
+{		
+		//document.forms[0].agree_address1.value = document.forms[0].add_address1.value;
+		/*document.forms[0].agree_address_id.value = document.forms[0].address_id.value;
+		document.forms[0].agree_address_id_1.value = document.forms[0].address_id_1.value;
+		document.forms[0].agree_address_id_2.value = document.forms[0].address_id_2.value;
+		document.forms[0].agree_address_id_3.value = document.forms[0].address_id_3.value;
+		document.forms[0].agree_address_id_4.value = document.forms[0].address_id_4.value;
+		document.forms[0].agree_address_id_5.value = document.forms[0].address_id_5.value;
+		document.forms[0].agree_address_id_6.value = document.forms[0].address_id_6.value;
+		document.forms[0].agree_address_id_7.value = document.forms[0].address_id_7.value;
+		document.forms[0].agree_address_id_8.value = document.forms[0].address_id_8.value;
+		document.forms[0].agree_address_id_9.value = document.forms[0].address_id_9.value;
+		document.forms[0].agree_address_id_10.value = document.forms[0].address_id_10.value;
+		document.forms[0].agree_address_id_11.value = document.forms[0].address_id_11.value;*/
+		document.forms[0].agree_address_no.value = document.forms[0].address_no.value;
+		document.forms[0].agree_moo.value = document.forms[0].moo.value;
+		document.forms[0].agree_place.value = document.forms[0].place.value;
+		document.forms[0].agree_soi.value =document.forms[0].soi.value;
+		document.forms[0].agree_street.value =document.forms[0].street.value;
+		document.forms[0].agree_country_code.value =document.forms[0].country_code.value;
+		document.forms[0].agree_province_code.value =document.forms[0].province_code.value;
+		document.forms[0].agree_province_name.value = document.forms[0].province_name.value;
+		document.forms[0].agree_district_code.value = document.forms[0].district_code.value;
+		document.forms[0].agree_district_name.value = document.forms[0].district_name.value;
+		document.forms[0].agree_subdistrict_code.value = document.forms[0].subdistrict_code.value;
+		document.forms[0].agree_subdistrict_name.value = document.forms[0].subdistrict_name.value;
+		document.forms[0].agree_postcode.value = document.forms[0].postcode.value ;
+		document.forms[0].agree_tel.value = document.forms[0].tel.value ;
+
+}	
+
+function f_agn_father()
+{
+		var v_prefix_code = document.forms[0].fprefix_chk.value;
+		
+		if (v_prefix_code == '001'|| v_prefix_code == '002'|| v_prefix_code == '003'|| v_prefix_code == '004'|| v_prefix_code == '005')
+			{
+				document.forms[0].elements['agn_prefix_name'].value =  '';
+				document.forms[0].elements['agn_prefix_code_thai_'+v_prefix_code].checked = true;
+				document.forms[0].elements['agn_prefix_code_other'].checked = false;	
+			}
+			else
+			{								
+				document.forms[0].elements['agn_prefix_code_other'].checked = true;	
+				document.forms[0].elements['agn_prefix_name'].value =  document.forms[0].fprefix_name.value;
+				document.forms[0].elements['agn_prefix_code'].value =  document.forms[0].fprefix_code.value;
+			}
+	
+		document.forms[0].agn_first_name.value = document.forms[0].ffirst_name.value;
+		document.forms[0].agn_last_name.value = document.forms[0].flast_name.value;
+		document.forms[0].agn_card_id.value = document.forms[0].fcard_id.value;
+		document.forms[0].agn_card_id_1.value = document.forms[0].fcard_id_1.value;
+		document.forms[0].agn_card_id_2.value = document.forms[0].fcard_id_2.value;
+		document.forms[0].agn_card_id_3.value = document.forms[0].fcard_id_3.value;
+		document.forms[0].agn_card_id_4.value = document.forms[0].fcard_id_4.value;
+		document.forms[0].agn_card_id_5.value = document.forms[0].fcard_id_5.value;
+		document.forms[0].agn_card_id_6.value = document.forms[0].fcard_id_6.value;
+		document.forms[0].agn_card_id_7.value = document.forms[0].fcard_id_7.value;
+		document.forms[0].agn_card_id_8.value = document.forms[0].fcard_id_8.value;
+		document.forms[0].agn_card_id_9.value = document.forms[0].fcard_id_9.value;
+		document.forms[0].agn_card_id_10.value = document.forms[0].fcard_id_10.value;
+		document.forms[0].agn_card_id_11.value = document.forms[0].fcard_id_11.value;
+		document.forms[0].agn_card_id_12.value = document.forms[0].fcard_id_12.value;
+		document.forms[0].agn_card_id_13.value = document.forms[0].fcard_id_13.value;
+		document.forms[0].agn_tel.value = document.forms[0].ftelephone.value;
+
+}	
+
+function f_agn_mather()
+{
+		var v_prefix_code = document.forms[0].mprefix_chk.value;
+		
+		if (v_prefix_code == '001'|| v_prefix_code == '002'|| v_prefix_code == '003'|| v_prefix_code == '004'|| v_prefix_code == '005')
+			{
+				document.forms[0].elements['agn_prefix_name'].value =  '';
+				document.forms[0].elements['agn_prefix_code_thai_'+v_prefix_code].checked = true;
+				document.forms[0].elements['agn_prefix_code_other'].checked = false;	
+			}
+			else
+			{								
+				document.forms[0].elements['agn_prefix_code_other'].checked = true;	
+				document.forms[0].elements['agn_prefix_name'].value =  document.forms[0].mprefix_name.value;
+				document.forms[0].elements['agn_prefix_code'].value =  document.forms[0].mprefix_code.value;
+			}
+	
+		document.forms[0].agn_first_name.value = document.forms[0].mfirst_name.value;
+		document.forms[0].agn_last_name.value = document.forms[0].mlast_name.value;
+		document.forms[0].agn_card_id.value = document.forms[0].mcard_id.value;
+		document.forms[0].agn_card_id_1.value = document.forms[0].mcard_id_1.value;
+		document.forms[0].agn_card_id_2.value = document.forms[0].mcard_id_2.value;
+		document.forms[0].agn_card_id_3.value = document.forms[0].mcard_id_3.value;
+		document.forms[0].agn_card_id_4.value = document.forms[0].mcard_id_4.value;
+		document.forms[0].agn_card_id_5.value = document.forms[0].mcard_id_5.value;
+		document.forms[0].agn_card_id_6.value = document.forms[0].mcard_id_6.value;
+		document.forms[0].agn_card_id_7.value = document.forms[0].mcard_id_7.value;
+		document.forms[0].agn_card_id_8.value = document.forms[0].mcard_id_8.value;
+		document.forms[0].agn_card_id_9.value = document.forms[0].mcard_id_9.value;
+		document.forms[0].agn_card_id_10.value = document.forms[0].mcard_id_10.value;
+		document.forms[0].agn_card_id_11.value = document.forms[0].mcard_id_11.value;
+		document.forms[0].agn_card_id_12.value = document.forms[0].mcard_id_12.value;
+		document.forms[0].agn_card_id_13.value = document.forms[0].mcard_id_13.value;
+		document.forms[0].agn_tel.value = document.forms[0].mtelephone.value;
+}
+
+	
+	function f_chk_queue(p_item , p_prj_id)
+	{ 
+     
+		url = "prc_yproject_project_member_chk_queue.php?queue_date=" + p_item + "&prj_id="+p_prj_id ;
+		//alert (url);
+		if (window.XMLHttpRequest) 
+		{ // Non-IE browsers 
+		  req = new XMLHttpRequest(); 
+		  req.onreadystatechange = targetDiv; 
+		  try
+		   { 
+				req.open("GET", url, true); 
+		 	}
+		 	catch (e)
+		 	 { 
+				alert(e); 
+		 	 } 
+		  req.send(null); 
+		}
+		 else if (window.ActiveXObject)
+		  { // IE 
+			  req = new ActiveXObject("Microsoft.XMLHTTP"); 
+			  if (req)
+			   { 
+					req.onreadystatechange = targetDiv; 
+					req.open("GET", url, true); 
+					req.send(); 		
+			  } 
+		} 
+} 
+
+function targetDiv() { 
+    if (req.readyState == 4) { // Complete 
+          if (req.status == 200) { // OK response 
+             // document.getElementById("MyDivName").innerHTML = req.responseText; 
+			 var a =  req.responseText; 
+			// alert(a);
+			  if (a == 'N')
+			  {	 
+				//alert ('ไม่สามารถเลือกวันที่ตรวจเอกสารและสัมภาษณ์ได้ เนื่องจากวันที่เลือกเต็ม');
+				msgbox('alert','ไม่สามารถเลือกวันที่ตรวจเอกสารและสัมภาษณ์ได้<br>เนื่องจากวันที่เลือก มีผู้สมัครครบตามจำนวนแล้ว !!');
+			  	document.forms[0].check_date.value = "";
+			  }
+          } else { 
+            alert("Problem: " + req.statusText); 
+          } 
+    } 
+}
+</script>
+<style>
+	.hide-robot{
+		display:none;
+	}
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+<form name="condition" method="POST" action="" enctype="multipart/form-data">
+<div id="container">
+  <div id="header_wh">
+  </div>
+   
+  <div id="content2">
+<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse" bgcolor="#FFFFFF">
+	<tbody><tr>
+		<td class="td-head">
+			&nbsp; ใบสมัครเข้าร่วมโครงการ
+		</td>
+		<td class="td-frm-head">		
+		FRM_YPROJECT_PROJECT_MEMBER_DETAIL.PHP</td>
+	</tr>
+	<tr>
+		<td class="td-sub-head">
+			<font color="#0000B3"><b>บันทึก</b></font>		
+			</td>
+		<td class="td-subfrm-head">
+		<img border="0" src="../images/arrow_d_all.gif" title="เปิดทั้งหมด" width="20" height="20" onclick="div_show_all();"><img border="0" src="../images/arrow_u_all.gif" title="ปิดทั้งหมด" width="20" height="20" onclick="div_hide_all();">
+          </td>
+	</tr>
+	<tr><td colspan="2">
+		<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+              <tbody><tr>
+                <td align="right" height="25" style="font-family:Tahoma; font-size:10pt; padding-left:15px" width="45">&nbsp;</td>
+                <td align="right" height="25" style="padding-right:5px; font-family:Tahoma; font-size:10pt; " width="160"><strong> ปีงบประมาณ :</strong></td>
+                <td align="left" height="25" style="font-family:Tahoma; font-size:10pt"><span lang="en-us">2567</span>&nbsp;&nbsp;
+				<strong> ชื่อโครงการ :</strong> ทดสอบสมัครโครงการ Work and Holiday Visa Thailand – Australia 2567 ครั้งที่ 2 (Work and Holiday Visa Thailand – Australia 2567 No.2)</td>
+              </tr>
+              <tr>
+                <td align="right" height="25" style="font-family:Tahoma; font-size:10pt; padding-left:15px" width="45">&nbsp;</td>
+                <td align="right" height="25" style="padding-right:5px; font-family:Tahoma; font-size:10pt; " width="160"><strong> วันที่เริ่มต้น :</strong></td>
+                <td align="left" height="25" style="font-family:Tahoma; font-size:10pt">13 พฤษภาคม 2567&nbsp;&nbsp;<strong> วันที่สิ้นสุด :</strong> 13 พฤษภาคม 2567</td>
+              </tr>
+			<!--
+              <tr>
+                <td align="right" height="25" style="font-family:Tahoma; font-size:10pt; padding-left:15px" width="45">&nbsp;</td>
+                <td align="right" height="25" style="padding-right:5px; font-family:Tahoma; font-size:10pt; " width="160" valign="top"><strong>ประเทศ :</strong></td>
+                <td align="left" height="25" style="font-family:Tahoma; font-size:10pt; " valign="top">
+				select project_detail_id, b.country_name,a.seq_no
+										from mn_youth_project_country  a ,bs_country b
+										 where project_detail_id = 263 
+										 and a.country_code=b.country_code(+)			    </td>
+              </tr>
+			-->
+			 <tr>
+                <td align="right" height="25" style="font-family:Tahoma; font-size:10pt; padding-left:15px" width="45">&nbsp;</td>
+                <td align="right" height="25" style="padding-right:5px; font-family:Tahoma; font-size:10pt; " width="160"><strong> จำนวนคนที่รับ :</strong></td>
+                <td align="left" height="25" style="font-family:Tahoma; font-size:10pt"> 4,000</td>
+              </tr> 
+				<tr>
+                <td align="right" height="15" style="font-family:Tahoma; font-size:10pt; padding-left:15px" width="45">&nbsp;</td>
+                <td align="right" height="15" style="padding-right:5px; font-family:Tahoma; font-size:10pt; " width="160">&nbsp;</td>
+                <td align="right" height="15" style="font-family:Tahoma; font-size:10pt"><input type="button" style="font-family:Tahoma; font-size:10pt;" value="กลับหน้าเลือกโครงการ" name="back" onclick="f_cardreturn('4294967569')"></td>
+              </tr>
+            </tbody></table>
+	<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">					
+	<tbody><tr>
+		<td class="td-green">
+		<span lang="th"><b>รายละเอียดผู้สมัครเข้าร่วมโครงการ</b></span></td>
+		<td class="td-green-arrow">
+		<div id="div_1_switch_down" style="display: none;">
+		<img border="0" src="../images/arrow_d.gif" title="เปิด" width="20" height="20" onclick="div_toggle('div_1_switch_down'); div_toggle('div_1_switch_up'); div_toggle('div_1');">
+		</div>
+		<div id="div_1_switch_up" style="display: block;">
+		<img border="0" src="../images/arrow_u.gif" title="ปิด" width="20" height="20" onclick="div_toggle('div_1_switch_down'); div_toggle('div_1_switch_up'); div_toggle('div_1');">
+		</div>
+		</td>
+	</tr>
+	</tbody></table>
+	<div id="div_1" style="display: block;">
+	<table width="100%" border="0" cellpadding="0" style="border-collapse: collapse">
+	<tbody><tr>
+	</tr>
+	</tbody></table>
+	<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">	
+	
+	<tbody><tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">เลขประจำตัวประชาชน :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="card_id_1" id="card_id_1" value="1" maxlength="1" class="id-readonly-box" readonly="">
+-<input type="text" name="card_id_2" id="card_id_2" value="9" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_3" id="card_id_3" value="0" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_4" id="card_id_4" value="9" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_5" id="card_id_5" value="8" maxlength="1" class="id-readonly-box" readonly="">
+-<input type="text" name="card_id_6" id="card_id_6" value="0" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_7" id="card_id_7" value="2" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_8" id="card_id_8" value="5" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_9" id="card_id_9" value="5" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_10" id="card_id_10" value="9" maxlength="1" class="id-readonly-box" readonly="">
+-<input type="text" name="card_id_11" id="card_id_11" value="3" maxlength="1" class="id-readonly-box" readonly="">
+<input type="text" name="card_id_12" id="card_id_12" value="3" maxlength="1" class="id-readonly-box" readonly="">
+-<input type="text" name="card_id_13" id="card_id_13" value="4" maxlength="1" class="id-readonly-box" readonly="">
+<input type="hidden" name="card_id" id="card_id" value="1909802559334">			</td>
+		</tr>				
+		<tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45">&nbsp;</td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">คำนำหน้าชื่อ :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="radio" value="003" checked="" name="prefix_code_thai" class="radio_style" onclick="javascript:document.forms[0].prefix_code_other.checked=false;document.forms[0].prefix_code.value='';document.forms[0].prefix_name.value='';chkSex('M',document.forms[0].sex_code)">นาย
+<input type="radio" value="004" name="prefix_code_thai" class="radio_style" onclick="javascript:document.forms[0].prefix_code_other.checked=false;document.forms[0].prefix_code.value='';document.forms[0].prefix_name.value='';chkSex('F',document.forms[0].sex_code)">นางสาว
+<input type="radio" value="005" name="prefix_code_thai" class="radio_style" onclick="javascript:document.forms[0].prefix_code_other.checked=false;document.forms[0].prefix_code.value='';document.forms[0].prefix_name.value='';chkSex('F',document.forms[0].sex_code)">นาง
+		  
+		  	            		<input name="prefix_code_other" id="prefix_code_other" type="radio" class="radio_style" value="0" onclick="javascript:clearButtons(document.forms[0].prefix_code_thai);">
+			  อื่น ๆ 
+			 <input type="text" name="prefix_name" id="prefix_name" value="" size="15" onblur="if(document.getElementById('prefix_name').value==''){document.getElementById('prefix_code').value=''; }" onclick="javascript:clearButtons(document.forms[0].prefix_code_thai);document.getElementById('prefix_code_other').checked=true; " class="text_style" style="font-family: Tahoma; font-size: 10pt; color: #000000; text-align: left" maxlength="50" autocomplete="off">     		 <input name="prefix_code" type="hidden" id="prefix_code" value="">      
+				<script type="text/javascript">
+                                var options_net = {
+                                    script:"ajax_prefix_other.php?json=true&limit=10&",
+                                    varname:"input",
+                                    json:true,
+                                    shownoresults:true,
+                                    maxresults:10,
+                                    callback: function (obj) { document.getElementById('prefix_code').value = obj.id; }
+                                };
+                                var as_jsonnet = new bsn.AutoSuggest('prefix_name', options_net);                        
+                            </script>			</td>
+		</tr>
+		<tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160"><font color="#0000FF">ชื่อ</font> :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="first_name" id="first_name" value="ธนกร" size="15" readonly="readonly" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">			&nbsp;&nbsp;<font color="#0000FF">นามสกุล</font> :
+				<input type="text" name="last_name" id="last_name" value="ชัยจีระธิกุล" size="15" readonly="readonly" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">			</td>
+		</tr>
+		<tr>
+                <td height="25" style="font-family: Tahoma; font-size: 10pt; padding-left: 15px; " width="45">&nbsp;</td>
+                <td height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="160" align="right"> Prefix<span lang="en-us"> :</span></td>
+                <td height="25" style="font-family:Tahoma; font-size:10pt"><input type="radio" value="E001" checked="" name="prefix_eng_eng" id="prefix_eng_eng" class="radio_style" onclick="javascript:document.forms[0].prefix_eng_other.checked=false;document.forms[0].prefix_code_eng.value='';document.forms[0].prefix_name_eng.value='';">MR.
+<input type="radio" value="E017" name="prefix_eng_eng" id="prefix_eng_eng" class="radio_style" onclick="javascript:document.forms[0].prefix_eng_other.checked=false;document.forms[0].prefix_code_eng.value='';document.forms[0].prefix_name_eng.value='';">MISS
+<input type="radio" value="E002" name="prefix_eng_eng" id="prefix_eng_eng" class="radio_style" onclick="javascript:document.forms[0].prefix_eng_other.checked=false;document.forms[0].prefix_code_eng.value='';document.forms[0].prefix_name_eng.value='';">MS.
+<input type="radio" value="E003" name="prefix_eng_eng" id="prefix_eng_eng" class="radio_style" onclick="javascript:document.forms[0].prefix_eng_other.checked=false;document.forms[0].prefix_code_eng.value='';document.forms[0].prefix_name_eng.value='';">MRS.
+                                    <input name="prefix_eng_other" id="prefix_eng_other" type="radio" class="radio_style" value="0" onclick="javascript:clearButtons(document.forms[0].prefix_eng_eng);">
+other
+				<input type="text" name="prefix_name_eng" id="prefix_name_eng" onkeypress="return autoEngKey(event)" value="" size="15" onblur="if(document.getElementById('prefix_name_eng').value==''){document.getElementById('prefix_code_eng').value=''; } else {this.value=this.value.toUpperCase();}" onclick="javascript:clearButtons(document.forms[0].prefix_eng_eng);document.getElementById('prefix_eng_other').checked=true; " onkeydown="javascript:clearButtons(document.forms[0].prefix_eng_eng);document.getElementById('prefix_eng_other').checked=true; " class="text_style" style="font-family: Tahoma; font-size: 10pt; color: #000000; text-align: left" maxlength="50">     		 <input name="prefix_code_eng" type="hidden" id="prefix_code_eng" value=""><font color="red">(สะกดคำนำหน้าชื่อตาม passport)</font></td>
+              </tr>
+              <tr>
+                <td height="25" style="font-family: Tahoma; font-size: 10pt; padding-left: 15px; " width="45">&nbsp;</td>
+                <td height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="160" align="right"><font color="#0000FF"> First Name</font> :</td>
+                <td height="25" style="font-family:Tahoma; font-size:10pt"><input type="text" name="first_name_eng" id="first_name_eng" onkeypress="return autoEngKey(event)" value="THANAKORN" size="15" readonly="readonly" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">              &nbsp;&nbsp;<font color="#0000FF">Last Name</font> :<input type="text" name="last_name_eng" id="last_name_eng" onkeypress="return autoEngKey(event)" value="CHAICHIRATIKUL" size="15" readonly="readonly" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">				<font color="#FF0000">(สะกดตัวพิมพ์ใหญ่ ตาม passport)</font>				</td>
+              </tr>	
+		<tr>
+                <td height="24" style="font-family: Tahoma; font-size: 10pt; padding-left: 15px; " width="45">&nbsp;</td>
+                <td height="24" style="font-family: Tahoma; font-size: 10pt;  padding-right:5px" width="160" align="right"> เพศ<span lang="en-us"> :</span></td>
+                <td height="24" style="font-family:Tahoma; font-size:10pt"><input type="radio" value="M" checked="" name="sex_code" id="sex_code" class="radio_style">ชาย&nbsp;&nbsp;
+<input type="radio" value="F" name="sex_code" id="sex_code" class="radio_style">หญิง&nbsp;&nbsp;
+</td>
+              </tr>
+            <tr>
+                  <td height="24" width="45" style="font-family: Tahoma; font-size: 10pt; padding-left: 15px; ">&nbsp;</td>
+                  <td height="24" width="160" style="font-family: Tahoma; font-size: 10pt;  padding-right:5px" align="right"> เชื้อชาติ<span lang="en-us"> :</span></td>
+                  <td height="24" style="font-family:Tahoma; font-size:10pt"><table border="0" width="100%" id="table15" cellpadding="0" style="border-collapse: collapse">
+                      <tbody><tr>
+                        <td width="100"><select size="1" name="race_code" id="race_code" onchange="if (this.value=='99999') { div_show_no('div_race'); } else { div_hide_no('div_race'); }" class="selection" style="font-family: Tahoma; font-size: ; color: #000000;">
+<option value="001">ไทย</option>
+<option value="002">จีน</option>
+<option value="000">ไม่มีข้อมูล</option>
+<option value="99999">อื่นๆ</option>
+<option value="048">ไทยใหม่</option>
+<option selected="" value=""></option>
+</select>
+</td>
+                        <td><div id="div_race" style="display: none;">&nbsp;
+                            ระบุ :<input type="text" name="race_other" id="race_other" value="" size="10" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="100">                          </div></td>
+                      </tr>
+                    </tbody></table></td>
+                </tr>
+                <tr>
+                  <td height="26" style="font-family: Tahoma; font-size: 10pt; padding-left: 15px; " width="45">&nbsp;</td>
+                  <td height="26" style="font-family: Tahoma; font-size: 10pt;  padding-right:5px" width="160" align="right"><font color="#0000FF"> สัญชาติ<span lang="en-us"> :</span></font></td>
+                  <td height="26" style="font-family:Tahoma; font-size:10pt">
+					<select size="1" name="nationality_code" id="nationality_code" class="selection" style="font-family: Tahoma; font-size: ; color: #000000;">
+<option selected="" value="001">ไทย</option>
+<option value=""></option>
+</select>
+</td>
+                </tr>  
+				 <tr>
+                  <td height="26" style="font-family: Tahoma; font-size: 10pt; padding-left: 15px; " width="45">&nbsp;</td>
+                  <td height="26" style="font-family: Tahoma; font-size: 10pt;  padding-right:5px" width="160" align="right"> ศาสนา<span lang="en-us"> :</span></td>
+                  <td height="26" style="font-family:Tahoma; font-size:10pt"><table border="0" width="100%" id="table15" cellpadding="0" style="border-collapse: collapse">
+                      <tbody><tr>
+                        <td width="100"><select size="1" name="religion_code" id="religion_code" class="selection" style="font-family: Tahoma; font-size: ; color: #000000;">
+<option value="01">พุทธ</option>
+<option value="02">คริสต์</option>
+<option value="03">อิสลาม</option>
+<option value="07">ไม่มีข้อมูล</option>
+<option value="99999">อื่น ๆ</option>
+<option selected="" value=""></option>
+</select>
+</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                    </tbody></table></td>
+                </tr>
+		<tr>
+			<td height="25" style="font-family: Tahoma; font-size: 10pt; " width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">
+			<font color="#0000FF">วันเดือนปี เกิด</font> :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">			
+			<input type="text" name="birth_date" id="birth_date" class="text_style" style="width:2cm; text-align:center;font-family: Tahoma; font-size: 10pt" maxlength="10" onkeypress="return autoTabNum2(this,8,event)" onfocus="date_delete_symbol(this);" value="" onblur="date_insert_symbol(this);f_cal_age ('birth_date', 'age_year', 'age_month');  ">				
+				<font color="#FF0000"> (ระบุเป็น ววดดปปปป เช่น 01012552)</font>			</td>
+		</tr>
+		<tr>
+		<td height="25" style="font-family:Tahoma; font-size:10pt" width="45">&nbsp;		</td>
+		<td height="25" style="font-family:Tahoma; font-size:10pt; padding-right:5px" width="160" align="right">
+		อายุ :</td>
+		<td height="25" style="font-family: Tahoma; font-size: 10pt">
+		<input type="text" name="age_year" id="age_year" value="" size="3" maxlength="3" class="text-readonly-box" style="font-family: Tahoma; font-size: ;text-align: Center" readonly="">&nbsp;ปี&nbsp;<input type="text" name="age_month" id="age_month" value="" size="3" maxlength="2" class="text-readonly-box" style="font-family: Tahoma; font-size: ;text-align: Center" readonly="">&nbsp;เดือน  <font color="red">อายุไม่เกิน 31 ปีบริบูรณ์นับตั้งแต่วันที่ขอวีซ่ากับสถานเอกอัคราชฑูต ประจำประเทศไทย</font></td>
+	</tr>
+		<tr>
+			<td height="25" style="font-family:Tahoma; font-size:10pt" width="45">&nbsp;			</td>
+			<td height="25" style="font-family:Tahoma; font-size:10pt; padding-right:5px" width="160" align="right">
+				สถานภาพสมรส :			</td>
+			<td height="25" style="font-family: Tahoma; font-size: 10pt">
+			 <input type="radio" name="marry_code" id="marry_code" value="1" checked="">
+                  โสด&nbsp;&nbsp;
+                  <input type="radio" name="marry_code" id="marry_code" value="2">
+                  สมรส&nbsp;&nbsp;	
+                  <input type="radio" name="marry_code" id="marry_code" value="3">
+                  หม้าย			</td>	
+		</tr>
+		</tbody></table>
+				<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+				<tbody><tr>
+						<td height="25" style="border-bottom:1px solid #FFFFFF; font-family: Tahoma; font-size: 10pt; padding-left: 35px;  padding-right:4px; padding-top:1px; padding-bottom:1px" bgcolor="#D7FFEB">
+						● ข้อมูลการติดต่อ</td>						
+				</tr>
+				</tbody></table>
+				<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+			<tbody><tr>
+				<td height="25" width="45">&nbsp;</td>
+				<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160"><font color="#0000FF">โทรศัพท์มือถือ</font> :</td>
+				<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+					<input type="text" name="mobile_phone" id="mobile_phone" value="" size="30" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50"></td>
+			</tr>
+			<tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160"><font color="#0000FF">E-mail </font>:</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="email" id="email" value="pongkunak2@gmail.com" size="30" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50"></td>
+		</tr>
+		</tbody></table>
+		<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">	
+	</table>
+	<div id="div_3">
+	  <table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+     <tbody><tr>
+		<td height="25" style="font-family: Tahoma; font-size: 10pt; padding-left: 35px;" bgcolor="#D7FFEB">
+		<b>การศึกษาขั้นสูงสุด</b></td>
+	</tr>
+	</tbody></table>
+	<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse" bgcolor="#FDEAF8">
+	<tbody><tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">สถาบัน :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="institute_bhl_detail" id="institute_bhl_detail" value="" size="50" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="200">			</td>
+	</tr>
+	<tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; color:#0000FF; " width="160">วุฒิ :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<select size="1" name="bachelor_degree_detail" id="bachelor_degree_detail" class="selection" style="font-family: Tahoma; font-size: ; color: #000000;">
+<option value="90">ประกาศนียบัตร หรือหลักสูตรเฉพาะ (สูงกว่าปริญญาเอก)</option>
+<option value="80">ปริญญาเอก หรือเทียบเท่า</option>
+<option value="60">ปริญญาโท หรือเทียบเท่า</option>
+<option value="40">ปริญญาตรี หรือเทียบเท่า</option>
+<option selected="" value=""></option>
+</select>
+</td>
+		</tr>
+		</tbody></table>
+		<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+		<tbody><tr>
+		<td height="25" style="font-family: Tahoma; font-size: 10pt; padding-left: 35px;" bgcolor="#D7FFEB">
+		<b>ทักษะการใช้ภาษาอังกฤษ <font color="#0000FF">(เลือกอย่างใดอย่างหนึ่ง)</font></b></td>
+	</tr>
+	</tbody></table>
+	<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse" bgcolor="#FDEAF8">
+		<tbody><tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; color:#0000FF" width="160"></td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt;">
+				<select name="status_test" id="status_test" onchange="f_test();" style="font-family: Tahoma; font-size: 10pt" class="">
+				<option value="" selected="">--กรุณาเลือกทักษะการใช้ภาษาอังกฤษ--</option>
+				<option value="TEST">ผลการทดสอบทักษะภาษาอังกฤษ </option>	
+				<option value="EDU">หลักฐานจากสถาบันการศึกษา </option>
+				</select>
+			</td>
+		</tr>	
+		</tbody></table>
+			<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+		    <tbody><tr>
+			<td height="28" style="font-family: Tahoma; font-size: 10pt; padding-left: 35px; padding-top:5px" bgcolor="#D7FFEB" valign="top">
+			<b>บุคคลที่ทางดย. สามารถติดต่อได้กรณีฉุกเฉิน คือ</b>
+			<!--&nbsp;&nbsp;<img border="0" src="../images/male.gif"  style="cursor:pointer"   title="ข้อมูลบิดา" onClick="clearButtons(document.forms[0].agn_prefix_code_thai);f_agn_father();"><font color="#0000FF"> เหมือนข้อมูลบิดา</font>
+				   &nbsp;&nbsp;<img border="0" src="../images/female.gif"  style="cursor:pointer"   title="ข้อมูลมารดา" onClick="clearButtons(document.forms[0].agn_prefix_code_thai);f_agn_mather();"><font color="#0000FF"> เหมือนข้อมูลมารดา</font>
+			-->
+			</td>
+			</tr>
+		</tbody></table>
+	<table width="100%" border="0" cellpadding="0" bgcolor="#FFF9DF" style="border-collapse: collapse">				
+		<tbody><tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45">&nbsp;</td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">คำนำหน้าชื่อ :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="radio" value="003" name="agn_prefix_code_thai" id="agn_prefix_code_thai_003" class="radio_style" onclick="javascript:document.forms[0].agn_prefix_code_other.checked=false;document.forms[0].agn_prefix_code.value='';document.forms[0].agn_prefix_name.value='';">นาย
+<input type="radio" value="004" name="agn_prefix_code_thai" id="agn_prefix_code_thai_004" class="radio_style" onclick="javascript:document.forms[0].agn_prefix_code_other.checked=false;document.forms[0].agn_prefix_code.value='';document.forms[0].agn_prefix_name.value='';">นางสาว
+<input type="radio" value="005" name="agn_prefix_code_thai" id="agn_prefix_code_thai_005" class="radio_style" onclick="javascript:document.forms[0].agn_prefix_code_other.checked=false;document.forms[0].agn_prefix_code.value='';document.forms[0].agn_prefix_name.value='';">นาง
+		  
+		  	            		<input name="agn_prefix_code_other" id="agn_prefix_code_other" type="radio" class="radio_style" value="0" onclick="javascript:clearButtons(document.forms[0].agn_prefix_code_thai);">
+			  อื่น ๆ 
+			 <input type="text" name="agn_prefix_name" id="agn_prefix_name" value="" size="15" onblur="if(document.getElementById('agn_prefix_name').value==''){document.getElementById('agn_prefix_code').value=''; }" onclick="javascript:clearButtons(document.forms[0].agn_prefix_code_thai);document.getElementById('agn_prefix_code_other').checked=true; " class="text_style" style="font-family: Tahoma; font-size: 10pt; color: #000000; text-align: left" maxlength="50" autocomplete="off">     		 <input name="agn_prefix_code" type="hidden" id="agn_prefix_code" value="">      
+				<script type="text/javascript">
+                                var options_net = {
+                                    script:"ajax_prefix_other.php?json=true&limit=10&",
+                                    varname:"input",
+                                    json:true,
+                                    shownoresults:true,
+                                    maxresults:10,
+                                    callback: function (obj) { document.getElementById('agn_prefix_code').value = obj.id; }
+                                };
+                                var as_jsonnet = new bsn.AutoSuggest('agn_prefix_name', options_net);                        
+                            </script>			</td>
+		</tr>
+		<tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">ชื่อ :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="agn_first_name" id="agn_first_name" value="" size="15" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">&nbsp;&nbsp;นามสกุล :
+				<input type="text" name="agn_last_name" id="agn_last_name" value="" size="15" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">			</td>
+		</tr>
+		<tr>
+			<td height="25" style="font-family:Tahoma; font-size:10pt" width="45">&nbsp;			</td>
+			<td height="25" style="font-family:Tahoma; font-size:10pt; padding-right:5px" width="160" align="right">
+				ความสัมพันธ์ :			</td>
+			<td height="25" style="font-family: Tahoma; font-size: 10pt">
+					<select size="1" name="agn_relation_code" id="agn_relation_code" class="selection" style="font-family: Tahoma; font-size: ; color: #000000;">
+<option value="$Son$">บุตร</option>
+<option value="02">บุตรบุญธรรม</option>
+<option value="$Mat$">คู่สมรส</option>
+<option value="$Fth$">บิดา</option>
+<option value="$Mth$">มารดา</option>
+<option value="06">พี่น้องร่วมบิดา หรือมารดา</option>
+<option value="08">ญาติ</option>
+<option value="09">ครู</option>
+<option value="10">นักสังคมสงเคราะห์</option>
+<option value="11">เจ้าหน้าที่สาธารณสุข</option>
+<option value="$Agn$">ผู้ปกครอง</option>
+<option value="$Cnt$">ผู้ที่ติดต่อได้</option>
+<option value="14">ตนเอง</option>
+<option value="15">คนรู้จัก</option>
+<option value="16">บุตรเขย</option>
+<option value="99999">อื่น ๆ</option>
+<option selected="" value=""></option>
+</select>
+<!--&nbsp;รายละเอียด :&nbsp;&nbsp;<input type=text name=agn_relation_other id=agn_relation_other value='' size=20    class="text_style"style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="100">--></td>	
+		</tr>  
+		<tr>
+			<td height="25" width="45">&nbsp;</td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">โทรศัพท์มือถือ :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="agn_mobile" id="agn_mobile" value="" size="30" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="50">			</td>
+		</tr>  
+		<tr>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px" width="45"></td>
+			<td align="right" height="25" style="font-family: Tahoma; font-size: 10pt; padding-right:5px; " width="160">E-mail :</td>
+			<td align="left" height="25" style="font-family: Tahoma; font-size: 10pt; ">
+				<input type="text" name="agn_email" id="agn_email" value="" size="30" class="text_style" style="font-family: Tahoma; font-size: ; color: #000000; text-align: LEFT" maxlength="100">			</td>
+		</tr>
+		<!--
+		<tr>
+			<td></td>
+			<td></td>
+			<td><input name="agn_fax" type="text" class="hide-robot"></td>
+		</tr>
+		-->
+		</tbody></table>
+	</div>
+	<div id="div_2" style="display: block;"></div>	
+		</div></td>
+	</tr>
+		</tbody></table>
+<font color="red"><b>*** หมายเหตุ หากท่านกรอกข้อมูลไม่ตรงกับความจริง หรือไม่ครบถ้วน อาจโดนพิจารณาตัดสิทธิ์การเข้าร่วมโครงการ<b></b></b></font><b><b>		
+	<table border="0" width="100%" cellpadding="0" style="border-collapse: collapse">
+	<tbody><tr>
+		<td class="td-foot">			
+			<table border="0" width="100%" id="table1" cellpadding="0" style="border-collapse: collapse">
+				<tbody><tr>
+					<td align="center" height="35">
+								<input type="hidden" name="sql_action" id="sql_action" value="INSERT">
+								<input type="hidden" name="project_detail_id" id="project_detail_id" value="263">
+								<input type="hidden" name="person_id" id="person_id" value="">
+								<input type="hidden" name="save_date" id="save_date" value="13-05-2567">
+																<input type="button" value="บันทึกข้อมูล" name="save_button" id="save_button" style="font-family: Tahoma; font-size: 10pt" onclick="javascript:
+									
+									if (!data_text_complete2 ('first_name', 'ชื่อ')) { return; }
+									if (!data_text_complete2 ('last_name', 'นามสกุล')) { return; }
+									if (!data_text_complete2 ('first_name_eng', 'ชื่อ(อังกฤษ)')) { return; }
+									if (!data_text_complete2 ('last_name_eng', 'นามสกุล(อังกฤษ)')) { return; }
+									if (!data_list_complete2 ('race_code', 'เชื่อชาติ', '')) { return; }
+									if (!data_list_complete2 ('nationality_code', 'สัญชาติ', '')) { return; }
+									if (!data_list_complete2 ('religion_code', 'ศาสนา', '')) { return; }
+									if (!data_text_complete2 ('birth_date', 'วันเดือนปีเกิด')) { return; }		
+                                    if (!data_text_complete2 ('mobile_phone', 'โทรศัพท์มือถือ')) { return; }
+									if (!data_text_complete2 ('email', 'E-mail')) { return; }		
+                                    var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+                                    if (!(filter.test($('#email').val()))) {  msgbox('alert','รูปแบบ E-mail ไม่ถูกต้อง','document.getElementById(\'email\').focus()');  return; }
+									if (!data_list_complete2 ('institute_bhl_detail', 'สถาบัน', '')) { return; }
+									if (!data_list_complete2 ('bachelor_degree_detail', 'วุฒิ', '')) { return; }
+									if (!data_list_complete2 ('status_test', 'กรุณาเลือกทักษะการใช้ภาษาอังกฤษ', '')) { return; }
+									if (!data_text_complete2 ('agn_first_name', 'ชื่อ')) { return; }
+									if (!data_text_complete2 ('agn_last_name', 'นามสกุล')) { return; }
+									if (!data_text_complete2 ('agn_relation_code', 'ความสัมพันธ์')) { return; }
+									if (!data_text_complete2 ('agn_mobile', 'โทรศัพท์มือถือ')) { return; }
+									if (!data_text_complete2 ('agn_email', 'E-mail')) { return; }		
+                                    var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+                                    if (!(filter.test($('#agn_email').val()))) {  msgbox('alert','รูปแบบ E-mail ไม่ถูกต้อง','document.getElementById(\'agn_email\').focus()');  return; }
+															
+									msgbox('confirm','<font color=#FF0000  style=\'font-size:15pt\'>กรุณาตรวจสอบความถูกต้อง !!</font><br><font color=\'#0000FF\'  style=\'font-size:15pt\'>หากบันทึกแล้วจะไม่สามารถแก้ไขได้</font><br><font color=#00FF00  style=\'font-size:15pt\'>ยืนยันการบันทึกข้อมูล ??</font>',' $(\'#save_button\').attr(\'disabled\', true);$(\'#Clear_button\').attr(\'disabled\', true); fsubmit_request();');">&nbsp;
+								<input type="reset" value="ยกเลิก" name="Clear_button" id="Clear_button" style="font-family: Tahoma; font-size: 10pt">
+								
+					</td>					
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+
+	</tbody></table>
+
+
+</b></b></div><b><b>
+</b></b></div><b><b>
+
+<div id="div" style="display:none; position: absolute; z-index: 1; left: 900px; top: 201px; border: 1px solid #808080; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px; width:331px; background-color:#F7F5F4">
+&nbsp;</div>
+<script>
+	if (	(document.getElementById('occupation_code').value=='010') || 
+		(document.getElementById('occupation_code').value=='003') || 
+		(document.getElementById('occupation_code').value=='006') || 
+		(document.getElementById('occupation_code').value=='118') || 
+		(document.getElementById('occupation_code').value=='128') || 
+		(document.getElementById('occupation_code').value=='99999'))
+	{ 
+		div_show_no ('occupation_div');
+	} 
+	else 
+	{ 
+		div_hide_no ('occupation_div'); 
+	}
+	
+	if (	(document.getElementById('moccupation_code').value=='010') || 
+		(document.getElementById('moccupation_code').value=='003') || 
+		(document.getElementById('moccupation_code').value=='006') || 
+		(document.getElementById('moccupation_code').value=='118') || 
+		(document.getElementById('moccupation_code').value=='128') || 
+		(document.getElementById('moccupation_code').value=='99999'))
+	{ 
+		div_show_no ('moccupation_div');
+	} 
+	else 
+	{ 
+		div_hide_no ('moccupation_div'); 
+	}
+	
+	if (	(document.getElementById('foccupation_code').value=='010') || 
+		(document.getElementById('foccupation_code').value=='003') || 
+		(document.getElementById('foccupation_code').value=='006') || 
+		(document.getElementById('foccupation_code').value=='118') || 
+		(document.getElementById('foccupation_code').value=='128') || 
+		(document.getElementById('foccupation_code').value=='99999'))
+	{ 
+		div_show_no ('foccupation_div');
+	} 
+	else 
+	{ 
+		div_hide_no ('foccupation_div'); 
+	}
+	
+</script>
+
+<script>
+	$().ready(function() {		
+		$('#dialog').dialog({autoOpen: false});			
+	});	
+</script>	
+
+</b></b></form><div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-dialog">Dialog Title</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="dialog" class="ui-dialog-content ui-widget-content"><p>&nbsp;</p></div><div class="ui-resizable-handle ui-resizable-n"></div><div class="ui-resizable-handle ui-resizable-e"></div><div class="ui-resizable-handle ui-resizable-s"></div><div class="ui-resizable-handle ui-resizable-w"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1001;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1002;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1003;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1004;"></div></div></body></html>

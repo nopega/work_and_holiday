@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=tis-620">
+<meta http-equiv="”content-language”" content="”th”">
+<meta name="description" content="กรมกิจการเด็กและเยาวชน">
+<meta name="keywords" content="กรมกิจการเด็กและเยาวชน">
+<title>กรมกิจการเด็กและเยาวชน</title>
+<link rel="shortcut icon" href="http://opptgg.opp.go.th/opp/favicon2.ico" type="image/x-icon"> 
+<link rel="icon" href="http://opptgg.opp.go.th/opp/favicon2.ico" type="image/x-icon">
+<link href="../css/default.css" rel="stylesheet" type="text/css">
+<link href="../css/app.css" rel="stylesheet" type="text/css">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="TIS-620">
+<script type="text/javascript" src="../lib/lib_AutoSuggest.js" charset="TIS-620"></script>
+<script language="JavaScript1.4" src="../lib/lib_java.js" type="text/javascript"></script>
+<script language="JavaScript1.4" src="../lib/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>
+
+<script language="JavaScript" src="../lib/ts_picker.js"></script>
+<script language="JavaScript" type="text/JavaScript">
+	function fprj(p_prj,p_card , p_person)
+	{
+			document.forms[0].action  = 'frm_yproject_project_member_detail.php?act=';
+			$('#project_detail_id').val(p_prj);
+			$('#card_id').val(p_card);
+			$('#person_id').val(p_person);
+			$('#firm_status').val('Y');
+			document.forms[0].submit();
+	}
+	
+	function f_cardreturn(p_prj)
+	{
+			document.forms[0].action  = 'sch_yproject_project_member.php?act=';
+			$('#project_detail_id').val(p_prj);
+			document.forms[0].submit();
+	}
+</script>
+</head>
+<body bgcolor="#FFFFFF">
+<form name="condition" method="POST" action="">
+  <div id="container" style="width:50%">
+    <div id="content2" style="height:auto">
+      <table border="0" width="100%" cellpadding="0" style="border-collapse: collapse" bgcolor="#FFFFFF">
+        <tbody><tr>
+		<td class="td-frm-head">
+		FRM_YPROJECT_PROJECT_MEMBER_FIRM.PHP</td>
+	</tr>
+        <tr>
+		<td class="td-sub-head">
+	<font color="#0000B3"><b>รายละเอียดคุณสมบัติเบื้องต้น</b></font></td>
+	</tr>
+	<tr><td height="25" style="padding:10px; font-family: Tahoma; font-size: 10pt; border-left-width:1px; border-right-width:1px; border-top-width:1px; border-bottom-style:solid; border-bottom-width:0px">
+		<table border="1" width="100%" id="table17" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
+			<tbody><tr>
+				<td height="25" align="left" style="font-family: Tahoma; font-size: 13pt">
+                <font style="font-size:13pt; font-weight:700">ข้อตกลง</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้าพเจ้าขอรับรองว่า มีคุณสมบัติครบถ้วนตามที่กำหนด และมีเอกสารหลักฐานประกอบการรับสมัครครบถ้วน รวมทั้งจะปฏิบัติตามเงื่อนไขและข้อตกลงของโครงการทุกประการ<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;หากข้าพเจ้ามีคุณสมบัติไม่ตรงตามประกาศรับสมัคร หรือเจตนากรอกข้อความเป็นเท็จ ให้ถือว่า
+ข้าพเจ้าเป็นผู้ขาดคุณสมบัติในทันที <br></td>
+		  </tr>
+	</tbody></table>
+</td>
+</tr>
+<tr>
+	<td style="font-size:14pt; font-weight:bold; color:#0000FF" align="center">
+			<input name="chk_firm" type="checkbox" id="chk_firm" value="Y">ยอมรับข้อตกลง
+	</td>
+</tr>
+<tr>
+		<td class="td-foot" colspan="3">&nbsp;
+		<input type="button" value="ยืนยัน" name="search_button" id="search_button" style="font-family: Tahoma;" onclick="javascript:if (document.condition.chk_firm.checked == true) { $('#search_button').attr('disabled', true); fprj(263,1909802559334,'') } else { msgbox('alert','กรุณายืนยันยอมรับข้อตกลง'); return false;}">
+        &nbsp;&nbsp;<input type="button" style="font-family:Tahoma; font-size:10pt;" value="กลับหน้าสมัครโครงการ" name="back" onclick="f_cardreturn(263)"> 
+		</td>
+	</tr>
+</tbody></table> 
+    </div>
+  </div>
+	<input type="hidden" id="project_detail_id" name="project_detail_id">
+	<input type="hidden" id="card_id" name="card_id">
+	<input type="hidden" id="person_id" name="person_id">
+	<input type="hidden" id="firm_status" name="firm_status">
+</form>
+<div id="div" style="display:none; position: absolute; z-index: 1; left: 900px; top: 201px; border: 1px solid #808080; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px; width:331px; background-color:#F7F5F4">
+&nbsp;</div>
+
+<script>
+	$().ready(function() {		
+		$('#dialog').dialog({autoOpen: false});			
+	});	
+</script>	
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-dialog">Dialog Title</span><a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="dialog" class="ui-dialog-content ui-widget-content"><p>&nbsp;</p></div><div class="ui-resizable-handle ui-resizable-n"></div><div class="ui-resizable-handle ui-resizable-e"></div><div class="ui-resizable-handle ui-resizable-s"></div><div class="ui-resizable-handle ui-resizable-w"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1001;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1002;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1003;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1004;"></div></div></body></html>
